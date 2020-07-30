@@ -1,6 +1,6 @@
 # DenverZooCli
 
-Get information on the animals at the Denver Zoo! test
+Get information on the animals at the Denver Zoo! 
 
 ## Installation
 
