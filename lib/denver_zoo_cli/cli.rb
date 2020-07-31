@@ -1,11 +1,13 @@
 class DenverZooCli::Cli
   
-  attr_accessor :all_animal_sites, :name
+  attr_accessor :name
   
   def run 
     puts "Welcome to the Denver Zoo!"
-    #scrape_test
+    DenverZooCli::Scraper.get_sites
+    DenverZooCli::Scraper.get_names
     #list_choices(all_animal_sites)
+    
   end
   
 
