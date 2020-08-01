@@ -3,13 +3,17 @@ class DenverZooCli::Scraper
     @@all_animal_sites = []
     
     def self.get_sites
-      @@all_animal_sites = Nokogiri::HTML(open("https://denverzoo.org/animals/")).css("a.animals-list.ddd").collect {|x|  x.attribute("href").value}
+      test = Nokogiri::HTML(open("https://denverzoo.org/animals/")).css("a.animals-list.ddd").collect {|x|  x.attribute("href").value}
+      x = test.collect do |y|
+        y.split("/")[4]
+      end
+      binding.pry
     end
     
     def self.get_names
     x = Nokogiri::HTML(open("https://denverzoo.org/animals/")).css(".animals-list__title h4")
     names = x.collect {|name| name.text}
-    binding.pry
+    #binding.pry
     end
   
   
