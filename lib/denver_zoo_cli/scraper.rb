@@ -7,9 +7,14 @@ class DenverZooCli::Scraper
     end
     
     def self.get_names
-     names = @@all_animal_sites.collect {|site|  Nokogiri::HTML(open(site)).css("h1 span.fl-heading-text").text}
+    x = Nokogiri::HTML(open("https://denverzoo.org/animals/")).css(".animals-list__title h4")
+    names = x.collect {|name| name.text}
     binding.pry
     end
+  
+  
+  
+  
   
    def self.scrape_test
     site = "https://denverzoo.org/animals/"
