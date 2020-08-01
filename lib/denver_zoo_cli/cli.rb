@@ -1,12 +1,16 @@
 class DenverZooCli::Cli
-  
+
   def run 
-    puts "\nWelcome to the Denver Zoo!\n"
-    puts "Please select the animal you'd like to know more about:"
-    DenverZooCli::Scraper.get_sites
-    list_choices(DenverZooCli::Scraper.get_names)
-    gets_choice
-    facts_or_fun
+      @again = "Y"
+    while @again == "Y"
+      puts "\nWelcome to the Denver Zoo!\n"
+      puts "Please select the animal you'd like to know more about:"
+      DenverZooCli::Scraper.get_sites
+      list_choices(DenverZooCli::Scraper.get_names)
+      gets_choice
+      facts_or_fun
+      again?
+    end
   end
   
   def list_choices(names)
@@ -41,6 +45,12 @@ class DenverZooCli::Cli
         puts animal.fun_facts
         
     end
+  end
+  
+  def again?
+    puts "Would you like to chose another animal?"
+    puts "'Y' to continue or any other key to exit:"
+    @again = gets.strip.upcase
   end
   
 end
