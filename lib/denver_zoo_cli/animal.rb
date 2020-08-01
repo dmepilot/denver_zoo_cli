@@ -1,6 +1,6 @@
 class DenverZooCli::Animal
   
-  attr_accessor :url, :name, :klass, :order, :family, :genus, :species
+  attr_accessor :url, :name, :klass, :order, :family, :genus, :species, :range, :habitat
   
   @@all = []
   
