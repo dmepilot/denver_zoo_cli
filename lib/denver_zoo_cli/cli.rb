@@ -38,8 +38,8 @@ class DenverZooCli::Cli
         puts animal.habitat
         
       elsif x == "2"
+        puts animal.fun_facts
         
-        binding.pry
     end
   end
   

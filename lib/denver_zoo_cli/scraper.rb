@@ -28,7 +28,8 @@ class DenverZooCli::Scraper
       new_animal.habitat = scientific_data[6].text
       new_animal.range = scientific_data[7].text
       animal_fun_facts = Nokogiri::HTML(open(url)).css("div.fl-rich-text ul li")
-      #binding.pry
+      c=animal_fun_facts.size
+      animal_fun_facts.each {|fact| new_animal.fun_facts << fact.text}
       
       
     end
