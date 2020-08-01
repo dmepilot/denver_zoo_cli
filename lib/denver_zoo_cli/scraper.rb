@@ -15,6 +15,14 @@ class DenverZooCli::Scraper
       #binding.pry
     end
   
+    def self.get_animal_data(name, url)
+      
+      DenverZooCli::Animal.new(name, url)
+      doc = url
+      
+      
+      
+    end
   
   
   

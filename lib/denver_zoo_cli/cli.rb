@@ -1,12 +1,9 @@
 class DenverZooCli::Cli
   
-  attr_accessor :name, :choice
-  
   def run 
     puts "\nWelcome to the Denver Zoo!\n"
     puts "Please select the animal you'd like to know more about:"
     DenverZooCli::Scraper.get_sites
-    #DenverZooCli::Scraper.get_names
     list_choices(DenverZooCli::Scraper.get_names)
     gets_choice
     facts_or_fun
@@ -20,6 +17,10 @@ class DenverZooCli::Cli
   
   def gets_choice
     @choice=gets.strip.to_i-1
+    name = DenverZooCli::Scraper.get_names[@choice]
+    site = DenverZooCli::Scraper.get_sites[@choice]
+    DenverZooCli::Scraper.get_animal_data(name, url)
+    binding.pry
   end
   
   def facts_or_fun
