@@ -27,7 +27,7 @@ class DenverZooCli::Scraper
       new_animal.species = scientific_data[5].text
       new_animal.habitat = scientific_data[6].text
       new_animal.range = scientific_data[7].text
-      binding.pry
+      #binding.pry
       
       
     end

@@ -17,20 +17,28 @@ class DenverZooCli::Cli
   
   def gets_choice
     @choice=gets.strip.to_i-1
-    name = DenverZooCli::Scraper.get_names[@choice]
+    @name = DenverZooCli::Scraper.get_names[@choice]
     url = DenverZooCli::Scraper.get_sites[@choice]
-    DenverZooCli::Scraper.get_animal_data(name, url)
-    binding.pry
+    DenverZooCli::Scraper.get_animal_data(@name, url)
   end
   
   def facts_or_fun
+    #binding.pry
+   animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
     puts "Would like (1)scientific data or (2)fun facts?"
     x=gets.strip
       if x == "1"
-        y=DenverZooCli::Scraper.get_sites[@choice]
-        binding.pry
+        puts animal.name
+        puts animal.klass
+        puts animal.order
+        puts animal.family
+        puts animal.genus
+        puts animal.species
+        puts animal.range
+        puts animal.habitat
+        
       elsif x == "2"
-        y=DenverZooCli::Scraper.get_sites[@choice]
+        
         binding.pry
     end
   end
