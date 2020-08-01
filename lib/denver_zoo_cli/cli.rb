@@ -18,7 +18,7 @@ class DenverZooCli::Cli
   def gets_choice
     @choice=gets.strip.to_i-1
     name = DenverZooCli::Scraper.get_names[@choice]
-    site = DenverZooCli::Scraper.get_sites[@choice]
+    url = DenverZooCli::Scraper.get_sites[@choice]
     DenverZooCli::Scraper.get_animal_data(name, url)
     binding.pry
   end

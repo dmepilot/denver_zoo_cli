@@ -17,9 +17,17 @@ class DenverZooCli::Scraper
   
     def self.get_animal_data(name, url)
       
-      DenverZooCli::Animal.new(name, url)
+      new_animal=DenverZooCli::Animal.new(name, url)
       doc = url
-      
+      scientific_data=Nokogiri::HTML(open(url)).css(".fl-module").css("div.fl-rich-text").css("p")
+      new_animal.klass = scientific_data[1].text
+      new_animal.order = scientific_data[2].text
+      new_animal.family = scientific_data[3].text
+      new_animal.genus = scientific_data[4].text
+      new_animal.species = scientific_data[5].text
+      new_animal.range = scientific_data[6].text
+      new_animal.habitat = scientific_data[7].text
+      binding.pry
       
       
     end
