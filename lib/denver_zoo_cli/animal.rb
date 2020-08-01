@@ -1,12 +1,13 @@
 class DenverZooCli::Animal
   
-  attr_accessor :url, :name, :klass, :order, :family, :genus, :species, :range, :habitat
+  attr_accessor :url, :name, :klass, :order, :family, :genus, :species, :range, :habitat, :fun_facts
   
   @@all = []
   
   def initialize(name, url)
     @name = name
     @url = url
+    @fun_facts = []
     self.save
   end
   
