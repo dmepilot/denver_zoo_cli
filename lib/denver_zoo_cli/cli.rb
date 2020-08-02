@@ -17,6 +17,8 @@ class DenverZooCli::Cli
     names.each.with_index(1) do |value, index|
       puts "#{index}. #{value}"
     end
+      puts "***************************"
+      puts "Please enter choice number: "
   end
   
   def gets_choice
@@ -28,8 +30,9 @@ class DenverZooCli::Cli
   end
   
   def facts_or_fun
-    #binding.pry
+    
    animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
+    puts "#{animal.name}"
     puts "Would you like (1)scientific data or (2)fun facts?"
     x=gets.strip
       if x == "1"
