@@ -54,12 +54,14 @@ class DenverZooCli::Cli
         puts animal.habitat
         
       elsif x == "2"
-        puts animal.fun_facts
+        animal.fun_facts.each do |fact|
+          puts "\n**#{fact}**\n"
+        end
     end
   end
   
   def again?
-    puts "Would you like to chose another animal?"
+    puts "\nWould you like to chose another animal?\n"
     puts "'Y' to continue or any other key to exit:"
     @again = gets.strip.upcase
   end
