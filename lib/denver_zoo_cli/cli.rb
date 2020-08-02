@@ -61,7 +61,7 @@ class DenverZooCli::Cli
         
       elsif x == "2"
         animal.fun_facts.each do |fact|
-          puts "\n**#{fact}**\n"
+           puts "\n**#{fact}**\n"
         end
       else
         facts_or_fun
