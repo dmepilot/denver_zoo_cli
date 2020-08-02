@@ -8,12 +8,14 @@ class DenverZooCli::Cli
       DenverZooCli::Scraper.get_sites
       list_choices(DenverZooCli::Scraper.get_names)
       gets_choice
+      fetch_data
       facts_or_fun
       again?
     end
   end
   
   def list_choices(names)
+    @all_names = names
     names.each.with_index(1) do |value, index|
       puts "#{index}. #{value}"
     end
@@ -23,14 +25,20 @@ class DenverZooCli::Cli
   
   def gets_choice
     @choice=gets.strip.to_i-1
+    if @choice < 0 || @choice > @all_names.size-1
+      puts "Invalid. Please enter a number:"
+      gets_choice
+    end
+    @choice
+  end
+  
+  def fetch_data
     @name = DenverZooCli::Scraper.get_names[@choice]
     url = DenverZooCli::Scraper.get_sites[@choice]
     DenverZooCli::Scraper.get_animal_data(@name, url)
-    
   end
   
   def facts_or_fun
-    
    animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
     puts "#{animal.name}"
     puts "Would you like (1)scientific data or (2)fun facts?"
@@ -49,13 +57,6 @@ class DenverZooCli::Cli
         puts animal.fun_facts
     end
   end
-  
-  def valid?(input)
-    input > 0 && input <= 70 
-  
-    #binding.pry
-  end
-    
   
   def again?
     puts "Would you like to chose another animal?"
