@@ -24,12 +24,13 @@ class DenverZooCli::Cli
     @name = DenverZooCli::Scraper.get_names[@choice]
     url = DenverZooCli::Scraper.get_sites[@choice]
     DenverZooCli::Scraper.get_animal_data(@name, url)
+    
   end
   
   def facts_or_fun
     #binding.pry
    animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
-    puts "Would like (1)scientific data or (2)fun facts?"
+    puts "Would you like (1)scientific data or (2)fun facts?"
     x=gets.strip
       if x == "1"
         puts animal.name
@@ -43,9 +44,15 @@ class DenverZooCli::Cli
         
       elsif x == "2"
         puts animal.fun_facts
-        
     end
   end
+  
+  def valid?(input)
+    input > 0 && input <= 70 
+  
+    #binding.pry
+  end
+    
   
   def again?
     puts "Would you like to chose another animal?"
