@@ -19,14 +19,12 @@ class DenverZooCli::Scraper
       classification = Nokogiri::HTML(open(url)).css("div.zoo-animal-classification").text.split("   ").reject! {|c| c == " " || c.empty? || c == "\n"}
       scientific_data = Nokogiri::HTML(open(url)).css(".fl-module-content.fl-node-content").css("div.fl-rich-text").css("p")
       #binding.pry
-      new_animal.klass = classification.find{|c| c[/Class/]}.lstrip
-      new_animal.order =  classification.find{|c| c[/Order/]}.lstrip
-      new_animal.family = classification.find{|c| c[/Family/]}.lstrip
-      new_animal.genus = classification.find{|c| c[/Genus/]}.lstrip
-      new_animal.species = classification.find{|c| c[/Species/]}.lstrip
-      if classification.find{|c| c[/Subspecies/]}
-        new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.lstrip
-      end
+      new_animal.klass = classification.find{|c| c[/Class/]}.lstrip unless !classification.find{|c| c[/Class/]}
+      new_animal.order =  classification.find{|c| c[/Order/]}.lstrip unless !classification.find{|c| c[/Order/]}
+      new_animal.family = classification.find{|c| c[/Family/]}.lstrip unless !classification.find{|c| c[/Family/]}
+      new_animal.genus = classification.find{|c| c[/Genus/]}.lstrip unless !classification.find{|c| c[/Genus/]}
+      new_animal.species = classification.find{|c| c[/Species/]}.lstrip unless !classification.find{|c| c[/Species/]}
+      new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.lstrip unless !classification.find{|c| c[/Subspecies/]}
       #binding.pry
       new_animal.habitat = scientific_data[6].text
       new_animal.range = scientific_data[7].text

@@ -1,4 +1,6 @@
 class DenverZooCli::Cli
+  
+  @@all_names = []
 
   def run 
       @again = "Y"
@@ -16,7 +18,7 @@ class DenverZooCli::Cli
   end
   
   def list_choices(names)
-    @all_names = names
+    @@all_names = names
     names.each.with_index(1) do |value, index|
       puts "#{index}. #{value}"
     end
@@ -26,7 +28,7 @@ class DenverZooCli::Cli
   
   def gets_choice
     @choice=gets.strip.to_i-1
-    if @choice < 0 || @choice > @all_names.size-1
+    if @choice < 0 || @choice > @@all_names.size-1
       puts "Invalid. Please enter a number:"
       gets_choice
     end
