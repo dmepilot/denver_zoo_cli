@@ -12,7 +12,7 @@ gem 'denver_zoo_cli'
 
 And then execute:
 
-    $ bundle
+    $ bundle 
 
 Or install it yourself as:
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+./bin/denver_zoo_cli 
 
 ## Development
 
