@@ -8,7 +8,7 @@ class DenverZooCli::Animal
     @name = name
     @url = url
     @fun_facts = []
-    self.save
+    self.save  
   end
   
   def self.all
@@ -16,7 +16,7 @@ class DenverZooCli::Animal
   end
   
   def save
-    @@all << self
+      @@all << self 
   end
   
   

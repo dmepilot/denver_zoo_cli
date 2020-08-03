@@ -14,9 +14,9 @@ class DenverZooCli::Scraper
     end
   
     def self.get_animal_data(name, url)
-      new_animal=DenverZooCli::Animal.new(name, url)
+      new_animal=DenverZooCli::Animal.new(name, url) 
       doc = url
-      classification = Nokogiri::HTML(open(url)).css("div.zoo-animal-classification").text.split("  ").reject! {|c| c == " " || c.empty? || c == "\n"}
+      classification = Nokogiri::HTML(open(url)).css("div.zoo-animal-classification").text.split("   ").reject! {|c| c == " " || c.empty? || c == "\n"}
       scientific_data = Nokogiri::HTML(open(url)).css(".fl-module-content.fl-node-content").css("div.fl-rich-text").css("p")
       #binding.pry
       new_animal.klass = classification.find{|c| c[/Class/]}.lstrip

@@ -11,6 +11,7 @@ class DenverZooCli::Cli
       fetch_data
       facts_or_fun
       again?
+      #binding.pry
     end
   end
   
