@@ -51,6 +51,7 @@ class DenverZooCli::Cli
         puts animal.family
         puts animal.genus
         puts animal.species
+        puts animal.subspecies if animal.subspecies
         puts ""
         puts "*****Range*****"
         puts animal.range

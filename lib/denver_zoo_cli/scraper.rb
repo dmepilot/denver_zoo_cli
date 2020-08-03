@@ -16,12 +16,18 @@ class DenverZooCli::Scraper
     def self.get_animal_data(name, url)
       new_animal=DenverZooCli::Animal.new(name, url)
       doc = url
-      scientific_data=Nokogiri::HTML(open(url)).css(".fl-module").css("div.fl-rich-text").css("p")
-      new_animal.klass = scientific_data[1].text
-      new_animal.order = scientific_data[2].text
-      new_animal.family = scientific_data[3].text
-      new_animal.genus = scientific_data[4].text
-      new_animal.species = scientific_data[5].text
+      classification = Nokogiri::HTML(open(url)).css("div.zoo-animal-classification").text.split("  ").reject! {|c| c == " " || c.empty? || c == "\n"}
+      scientific_data=Nokogiri::HTML(open(url)).css(".fl-module-content fl-node-content").css("div.fl-rich-text").css("p")
+      #binding.pry
+      new_animal.klass = classification.find{|c| c[/Class/]}.lstrip
+      new_animal.order =  classification.find{|c| c[/Order/]}.lstrip
+      new_animal.family = classification.find{|c| c[/Family/]}.lstrip
+      new_animal.genus = classification.find{|c| c[/Genus/]}.lstrip
+      new_animal.species = classification.find{|c| c[/Species/]}.lstrip
+      if classification.find{|c| c[/Subspecies/]}
+        new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.lstrip
+      end
+      #binding.pry
       new_animal.habitat = scientific_data[6].text
       new_animal.range = scientific_data[7].text
       animal_fun_facts = Nokogiri::HTML(open(url)).css("div.fl-rich-text ul li")
