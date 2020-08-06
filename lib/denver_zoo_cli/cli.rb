@@ -10,9 +10,9 @@ class DenverZooCli::Cli
       list_choices(DenverZooCli::Scraper.get_names)
       gets_choice
       fetch_data
-      facts_or_fun
+      get_data_choice
+      print_data
       again?
-      #binding.pry
     end
   end
   
@@ -45,34 +45,38 @@ class DenverZooCli::Cli
     DenverZooCli::Scraper.get_animal_data(@name, url)
   end
   
-  def facts_or_fun
-   animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
-    puts "*****#{animal.name}*****"
+  def get_data_choice
+   @animal = DenverZooCli::Animal.all.find {|x| x.name == @name} 
+    puts "*****#{@animal.name}*****"
     puts "Would you like (1)scientific data or (2)fun facts?"
-    x=gets.strip
-      if x == "1"
+    @data_choice=gets.strip
+    @data_choice
+  end
+  
+  def print_data
+    if @data_choice == "1"
         puts ""
-        puts "****#{animal.name}*****"
-        puts animal.klass
-        puts animal.order
-        puts animal.family
-        puts animal.genus
-        puts animal.species
-        puts animal.subspecies if animal.subspecies
+        puts "****#{@animal.name}*****"
+        puts @animal.klass
+        puts @animal.order
+        puts @animal.family
+        puts @animal.genus
+        puts @animal.species
+        puts @animal.subspecies if @animal.subspecies
         puts ""
         puts "*****Range*****"
-        puts animal.range
+        puts @animal.range
         puts ""
         puts "*****Habitat*****"
-        puts animal.habitat
+        puts @animal.habitat
         puts ""
         
-      elsif x == "2"
-        animal.fun_facts.each do |fact|
+      elsif @data_choice == "2"
+        @animal.fun_facts.each do |fact|
            puts "\n**#{fact}**\n"
         end
       else
-        facts_or_fun
+        get_data_choice
     end
   end
   
