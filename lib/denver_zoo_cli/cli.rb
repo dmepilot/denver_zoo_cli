@@ -5,8 +5,7 @@ class DenverZooCli::Cli
   def run 
       @again = "Y"
     while @again == "Y"
-      puts "\nWelcome to the Denver Zoo!\n"
-      puts "Please select the animal you'd like to know more about:"
+      welcome_user
       DenverZooCli::Scraper.get_sites
       list_choices(DenverZooCli::Scraper.get_names)
       gets_choice
@@ -15,6 +14,11 @@ class DenverZooCli::Cli
       again?
       #binding.pry
     end
+  end
+  
+  def welcome_user 
+    puts "\nWelcome to the Denver Zoo!\n"
+    puts "Please select the animal you'd like to know more about:"
   end
   
   def list_choices(names)
