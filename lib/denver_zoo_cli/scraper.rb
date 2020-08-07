@@ -23,8 +23,13 @@ class DenverZooCli::Scraper
       new_animal.genus = classification.find{|c| c[/Genus/]}.strip unless !classification.find{|c| c[/Genus/]}
       new_animal.species = classification.find{|c| c[/Species/]}.strip unless !classification.find{|c| c[/Species/]}
       new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.strip unless !classification.find{|c| c[/Subspecies/]}
-      new_animal.range = scientific_data.text.split("\n")[6].strip
-      new_animal.habitat = scientific_data.text.split("\n")[5].strip
+      if scientific_data.text.split("\n")[6].strip.empty?
+        new_animal.range = scientific_data.text.split("\n")[8].strip
+        new_animal.habitat = scientific_data.text.split("\n")[7].strip
+      else
+        new_animal.range = scientific_data.text.split("\n")[6].strip
+        new_animal.habitat = scientific_data.text.split("\n")[5].strip
+      end
       animal_fun_facts = Nokogiri::HTML(open(url)).css("div.fl-rich-text ul li")
       animal_fun_facts.each {|fact| new_animal.fun_facts << fact.text}
       new_animal.fun_facts.reject! {|f| f.empty?}
