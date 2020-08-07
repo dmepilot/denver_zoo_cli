@@ -12,6 +12,7 @@ class DenverZooCli::Cli
       fetch_data
       get_data_choice
       print_data
+      binding.pry
       again?
     end
   end
@@ -42,7 +43,7 @@ class DenverZooCli::Cli
   def fetch_data
     @name = DenverZooCli::Scraper.get_names[@choice]
     url = DenverZooCli::Scraper.get_sites[@choice]
-    DenverZooCli::Scraper.get_animal_data(@name, url)
+    DenverZooCli::Scraper.get_animal_data(@name, url) unless DenverZooCli::Animal.all.find {|x| x.name == @name}
   end
   
   def get_data_choice
