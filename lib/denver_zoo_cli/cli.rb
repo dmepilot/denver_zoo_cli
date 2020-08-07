@@ -12,7 +12,6 @@ class DenverZooCli::Cli
       fetch_data
       get_data_choice
       print_data
-      binding.pry
       again?
     end
   end
