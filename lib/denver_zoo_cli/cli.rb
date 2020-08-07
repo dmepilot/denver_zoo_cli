@@ -50,7 +50,11 @@ class DenverZooCli::Cli
     puts "*****#{@animal.name}*****"
     puts "Would you like (1)scientific data or (2)fun facts?"
     @data_choice=gets.strip
-    @data_choice
+    if @data_choice == "1" || @data_choice == "2"
+      @data_choice
+    else
+      get_data_choice
+    end
   end
   
   def print_data

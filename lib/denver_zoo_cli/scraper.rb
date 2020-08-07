@@ -23,7 +23,7 @@ class DenverZooCli::Scraper
       new_animal.genus = classification.find{|c| c[/Genus/]}.strip unless !classification.find{|c| c[/Genus/]}
       new_animal.species = classification.find{|c| c[/Species/]}.strip unless !classification.find{|c| c[/Species/]}
       new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.strip unless !classification.find{|c| c[/Subspecies/]}
-      if scientific_data.text.split("\n")[6].strip.empty?
+      if scientific_data.text.split("\n")[5].strip.empty?
         new_animal.range = scientific_data.text.split("\n")[8].strip
         new_animal.habitat = scientific_data.text.split("\n")[7].strip
       else
