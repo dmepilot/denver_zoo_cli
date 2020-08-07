@@ -16,20 +16,15 @@ class DenverZooCli::Scraper
     def self.get_animal_data(name, url)
       new_animal=DenverZooCli::Animal.new(name, url) 
       classification = Nokogiri::HTML(open(url)).css("div.zoo-animal-classification").text.split("   ").reject! {|c| c == " " || c.empty? || c == "\n"}
-      scientific_data = Nokogiri::HTML(open(url)).css(".fl-module-content.fl-node-content").css("div.fl-rich-text").css("p")
+      scientific_data = Nokogiri::HTML(open(url)).css(".fl-rich-text")
       new_animal.klass = classification.find{|c| c[/Class/]}.strip unless !classification.find{|c| c[/Class/]}
       new_animal.order =  classification.find{|c| c[/Order/]}.strip unless !classification.find{|c| c[/Order/]}
       new_animal.family = classification.find{|c| c[/Family/]}.strip unless !classification.find{|c| c[/Family/]}
       new_animal.genus = classification.find{|c| c[/Genus/]}.strip unless !classification.find{|c| c[/Genus/]}
       new_animal.species = classification.find{|c| c[/Species/]}.strip unless !classification.find{|c| c[/Species/]}
       new_animal.subspecies = classification.find{|c| c[/Subspecies/]}.strip unless !classification.find{|c| c[/Subspecies/]}
-      if classification.find{|c| c[/Subspecies/]}
-        new_animal.habitat = Nokogiri::HTML(open(url)).css(".fl-rich-text").text.split("\t")[3].split("\n")[0]
-        new_animal.range = Nokogiri::HTML(open(url)).css(".fl-rich-text").text.split("\t")[3].split("\n")[1]
-      else
-        new_animal.habitat = scientific_data[6].text
-        new_animal.range = scientific_data[7].text
-      end
+      new_animal.range = scientific_data.text.split("\n")[6].strip
+      new_animal.habitat = scientific_data.text.split("\n")[5].strip
       animal_fun_facts = Nokogiri::HTML(open(url)).css("div.fl-rich-text ul li")
       animal_fun_facts.each {|fact| new_animal.fun_facts << fact.text}
       new_animal.fun_facts.reject! {|f| f.empty?}
