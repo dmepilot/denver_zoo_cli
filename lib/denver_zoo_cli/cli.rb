@@ -6,7 +6,7 @@ class DenverZooCli::Cli
       welcome_user
       DenverZooCli::Scraper.get_all_animals
       list_choices
-      gets_choice
+      get_choice
       fetch_data
       get_data_choice
       print_data
@@ -28,11 +28,11 @@ class DenverZooCli::Cli
       puts "Please enter choice number: "
   end
   
-  def gets_choice
+  def get_choice
     @choice=gets.strip.to_i-1
     if @choice < 0 || @choice > @all_names.size-1
       puts "Invalid. Please enter a number:"
-      gets_choice
+      get_choice
     end
     @choice
   end
