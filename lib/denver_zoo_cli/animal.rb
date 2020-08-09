@@ -1,5 +1,5 @@
 class DenverZooCli::Animal
-  #test commit 
+  
   attr_accessor :url, :name, :klass, :order, :family, :genus, :species, :subspecies, :range, :habitat, :fun_facts
   
   @@all = []
